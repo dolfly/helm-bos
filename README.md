@@ -4,22 +4,23 @@
 
 # helm-bos
 ![Helm3 supported](https://img.shields.io/badge/Helm%203-supported-green)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/hayorov/helm-bos)
-[![Build Status](https://travis-ci.org/hayorov/helm-bos.svg?branch=master)](https://travis-ci.org/hayorov/helm-bos)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/dolfly/helm-bos)
+[![Build Status](https://travis-ci.org/dolfly/helm-bos.svg?branch=master)](https://travis-ci.org/dolfly/helm-bos)
 
 
-`helm-bos` is a [helm](https://github.com/kubernetes/helm) plugin that allows you to manage private helm repositories on [Google Cloud Storage](https://cloud.google.com/storage/) aka buckets.
+`helm-bos` is a [helm](https://github.com/kubernetes/helm) plugin that allows you to manage private helm repositories on [Baidu Object Service](https://cloud.baidu.com/doc/BOS/index.html) aka buckets.
 
 ## Installation
 
 Install the stable version:
+
+```shell
 $ helm plugin install https://github.com/dolfly/helm-bos.git
-	"github.com/ghodss/yaml"
 ```
 
 Install a specific version:
 ```shell
-$ helm plugin install https://github.com/dolfly/helm-bos.git --version 0.3.5
+$ helm plugin install https://github.com/dolfly/helm-bos.git --version 1.0.0
 ```
 
 ## Quick start
@@ -48,18 +49,14 @@ $ helm bos rm chart repo-name
 
 ### Authentification
 
-To authenticate against GCS you can:
+To authenticate against BOS you can:
 
- -   Use the [application default credentials](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/)
-
- -   Use a service account via [`export GOOGLE_APPLICATION_CREDENTIALS=credentials.json` system variable](https://cloud.google.com/docs/authentication/getting-started)
-
-See [GCP documentation](https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application) for more information.
+use the Global Flag Ak & SK.
 
 
 ### Create a repository
 
-First, you need to [create a bucket on GCS](https://cloud.google.com/storage/docs/creating-buckets), which will be used by the plugin to store your charts.
+First, you need to [create a bucket on BOS](https://cloud.baidu.com/doc/BOS/s/7k6kqojlr), which will be used by the plugin to store your charts.
 
 Then you have to initialize a repository at a specific location in your bucket:
 
@@ -128,11 +125,8 @@ $ helm bos remove my-chart my-repository --version 0.1.0
 
 ## Troubleshootin
 
-You can use the global flag `--debug`, or set `HELM_GCS_DEBUG=true` to get more informations. Please write an issue if you find any bug.
+You can use the global flag `--debug`, or set `HELM_BOS_DEBUG=true` to get more informations. Please write an issue if you find any bug.
 
 ## Helm versions
 
-Starting from 0.3 helm-bos works with Helm 3, if you want to use it with Helm 2 please install the latest version that supports it
-```shell
-helm plugin install https://github.com/dolfly/helm-bos.git --version 0.2.2 # helm 2 compatible 
-```
+helm-bos works with Helm 3.
