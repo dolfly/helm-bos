@@ -1,0 +1,14 @@
+name: "bos"
+version: "1.0.0"
+usage: "Chart repositories on Baidu Object Service"
+description: |-
+  Manage repositories on Baidu Object Service
+command: "$HELM_PLUGIN_DIR/bin/helm-bos"
+downloaders:
+- command: "scripts/pull.sh"
+  protocols:
+  - "bs"
+  - "bos"
+hooks:
+  install: "cd $HELM_PLUGIN_DIR; ./scripts/install.sh"
+  update: "cd $HELM_PLUGIN_DIR; ./scripts/install.sh"

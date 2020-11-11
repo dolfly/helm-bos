@@ -1,0 +1,21 @@
+# .goreleaser.yml
+# Build customization
+builds:
+  - main: ./cmd/helm-bos/main.go
+    binary: helm-bos
+    ldflabos: -s -w -X github.com/dolfly/helm-bos/cmd/helm-bos/cmd.version={{.Version}} -X github.com/dolfly/helm-bos/cmd/helm-bos/cmd.commit={{.Commit}} -X github.com/dolfly/helm-bos/cmd/helm-bos/cmd.date={{.Date}}
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+    env:
+      - CGO_ENABLED=0
+archives:
+  - id: helm-bos
+    format: tar.gz
+    replacements:
+      amd64: x86_64
+      darwin: Darwin
+      linux: Linux
